@@ -18,7 +18,7 @@ Usage:
         resolver.fulfill("OK");
         return resolver.promise();
       })();
-			
+
 			promise.then(function (value) {
 				console.log(value);
 				return value;
@@ -36,38 +36,38 @@ Usage:
 
     <script src="signal.js"></script>
     <script>
-    // create a signal that emits the string "beat" every second
-  	var beat = (function () {
-      // keep the emitter private
-			var emitter = new Emitter();
-			interval = setInterval(function () {
-				console.log("beat");
-				emitter.emit("beat");
-			}, 1000);
-      // return the signal to the caller
-			return emitter.signal();
-		})();
+      // create a signal that emits the string "beat" every second
+    	var beat = (function () {
+        // keep the emitter private
+  			var emitter = new Emitter();
+  			interval = setInterval(function () {
+  				console.log("beat");
+  				emitter.emit("beat");
+  			}, 1000);
+        // return the signal to the caller
+		  	return emitter.signal();
+		  })();
 
-    // we can turn the signal into another signal with fold, filter and map
-    // in this example we start counting the beats
-		var count = beat.fold(0, function (current, value) {
-			return current + 1;
-		});
+      // we can turn the signal into another signal with fold, filter and map
+      // in this example we start counting the beats
+  		var count = beat.fold(0, function (current, value) {
+  			return current + 1;
+  		});
 
-    // map, filter and fold can be chained
-    // pass a listener function to the listen method to receive the events 
-		count.filter(function (value) {
-      // emit only even numbers
-			return value % 2 == 0;
-		}).map(function (value) {
-      // emit the square of the number
-			return value * value;
-		}).listen(function (value) {
-      // value = 4, 16, 36, 64, ...
-			console.log(value);
-		});
+      // map, filter and fold can be chained
+      // pass a listener function to the listen method to receive the events
+  		count.filter(function (value) {
+        // emit only even numbers
+  			return value % 2 == 0;
+  		}).map(function (value) {
+        // emit the square of the number
+  			return value * value;
+  		}).listen(function (value) {
+        // value = 4, 16, 36, 64, ...
+  			console.log(value);
+  		});
 	  </script>
-    
+
 The concept becomes more interesting when you listen for DOM events and then emit. For example:
 
     var signal = (function () {
@@ -77,17 +77,17 @@ The concept becomes more interesting when you listen for DOM events and then emi
       }
       return emitter.signal();
     });
-    
+
     position = signal.map(function (e) {
       return {x: e.clientX, y: e.clientY};
     }).listen(function(position) {
       console.log("(" + position.x + "," + position.y + ")");
     };
-    
+
 A jQuery plugin is provided in plugin.js:
 
     var mousemove = $("body").signal("mousemove");
-    
+
 To implement
 ------------
 * Ability to pause, stop and resume signals
