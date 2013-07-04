@@ -74,7 +74,7 @@ The concept becomes more interesting when you listen for DOM events and then emi
       var emitter = new Emitter();
       document.body.addEventListener("mousemove", function (e) {
         emitter.emit(e);
-      }
+      });
       return emitter.signal();
     });
 
@@ -82,7 +82,7 @@ The concept becomes more interesting when you listen for DOM events and then emi
       return {x: e.clientX, y: e.clientY};
     }).listen(function(position) {
       console.log("(" + position.x + "," + position.y + ")");
-    };
+    });
 
 A jQuery plugin is provided in plugin.js:
 
