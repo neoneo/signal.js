@@ -1,13 +1,13 @@
-(function ($, signal) {
+(function ($, Emitter) {
 
 	$.fn.signal = function (events, selector, data) {
-		var source = signal.source();
+		var emitter = new Emitter();
 
 		this.on(events, selector, data, function (e) {
-			source.emit(e);
+			emitter.emit(e);
 		});
 
-		return source.signal();
+		return emitter.signal();
 	}
 
-})(jQuery, signal);
+})(jQuery, Emitter);
