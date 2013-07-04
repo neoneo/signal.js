@@ -10,7 +10,7 @@ As far as I know, Promise.js conforms to the Promises/A+ spec, but I haven't got
 Usage:
 
     <script src="promise.js"></script>
-  	<script>
+    <script>
       var promise = (function () {
         // keep the resolver private, it decides when the promise is fullfilled or rejected
         var resolver = new Resolver();
@@ -19,11 +19,11 @@ Usage:
         return resolver.promise();
       })();
 
-			promise.then(function (value) {
-				console.log(value);
-				return value;
-			});
-		</script>
+      promise.then(function (value) {
+        console.log(value);
+        return value;
+      });
+    </script>
 
 
 Signal.js
@@ -37,36 +37,36 @@ Usage:
     <script src="signal.js"></script>
     <script>
       // create a signal that emits the string "beat" every second
-    	var beat = (function () {
+      var beat = (function () {
         // keep the emitter private
-  			var emitter = new Emitter();
-  			interval = setInterval(function () {
-  				console.log("beat");
-  				emitter.emit("beat");
-  			}, 1000);
+        var emitter = new Emitter();
+        interval = setInterval(function () {
+          console.log("beat");
+          emitter.emit("beat");
+        }, 1000);
         // return the signal to the caller
-		  	return emitter.signal();
-		  })();
+        return emitter.signal();
+      })();
 
       // we can turn the signal into another signal with fold, filter and map
       // in this example we start counting the beats
-  		var count = beat.fold(0, function (current, value) {
-  			return current + 1;
-  		});
+      var count = beat.fold(0, function (current, value) {
+        return current + 1;
+      });
 
       // map, filter and fold can be chained
       // pass a listener function to the listen method to receive the events
-  		count.filter(function (value) {
+      count.filter(function (value) {
         // emit only even numbers
-  			return value % 2 == 0;
-  		}).map(function (value) {
+        return value % 2 == 0;
+      }).map(function (value) {
         // emit the square of the number
-  			return value * value;
-  		}).listen(function (value) {
+        return value * value;
+      }).listen(function (value) {
         // value = 4, 16, 36, 64, ...
-  			console.log(value);
-  		});
-	  </script>
+        console.log(value);
+      });
+    </script>
 
 The concept becomes more interesting when you listen for DOM events and then emit. For example:
 
