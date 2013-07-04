@@ -28,9 +28,9 @@ Usage:
 
 Signal.js
 ---------
-Signals are related to promises. The main difference is that a Signal will keep calling the listener whereas a Promise will call the listener just once.
+Signals are similar to promises. The main difference is that a signal will keep calling the listener whereas a promise will call the listener just once. Additionally, a signal has no failure analog (onReject) at the moment.
 
-It is still work (and thought) in progress, but the idea is interesting IMO.
+It is work (and thought) in progress, but the idea is interesting IMO.
 
 Usage:
 
