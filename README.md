@@ -55,14 +55,14 @@ Usage:
       });
 
       // map, filter and fold can be chained
-      // pass a listener function to the listen method to receive the events
+      // pass a listener function to the watch method to receive the events
       count.filter(function (value) {
         // emit only even numbers
         return value % 2 == 0;
       }).map(function (value) {
         // emit the square of the number
         return value * value;
-      }).listen(function (value) {
+      }).watch(function (value) {
         // value = 4, 16, 36, 64, ...
         console.log(value);
       });
@@ -70,7 +70,7 @@ Usage:
 
 The concept becomes more interesting when you listen for DOM events and then emit. For example:
 
-    var signal = (function () {
+    var mousemove = (function () {
       var emitter = new Emitter();
       document.body.addEventListener("mousemove", function (e) {
         emitter.emit(e);
@@ -78,9 +78,10 @@ The concept becomes more interesting when you listen for DOM events and then emi
       return emitter.signal();
     });
 
-    position = signal.map(function (e) {
+    mousemove.map(function (e) {
+      // convert the event object into a hashmap with x and y
       return {x: e.clientX, y: e.clientY};
-    }).listen(function(position) {
+    }).watch(function(position) {
       console.log("(" + position.x + "," + position.y + ")");
     });
 

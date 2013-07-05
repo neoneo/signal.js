@@ -24,7 +24,7 @@ var Emitter = (function () {
 
 		var subscribers = [];
 
-		this.listen = function(onEmit) {
+		this.watch = function(onEmit) {
 			subscribers.push(onEmit);
 		}
 
@@ -45,7 +45,7 @@ var Emitter = (function () {
 		map: function (f) {
 			var emitter = new Emitter();
 
-			this.listen(function (value) {
+			this.watch(function (value) {
 				emitter.emit(f(value));
 			});
 
@@ -55,7 +55,7 @@ var Emitter = (function () {
 		filter: function (f) {
 			var emitter = new Emitter();
 
-			this.listen(function (value) {
+			this.watch(function (value) {
 				if (f(value)) {
 					emitter.emit(value);
 				}
@@ -68,7 +68,7 @@ var Emitter = (function () {
 			var emitter = new Emitter();
 			var current = initial;
 
-			this.listen(function (value) {
+			this.watch(function (value) {
 				current = f(current, value);
 				emitter.emit(current);
 			})
