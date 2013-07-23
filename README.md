@@ -89,13 +89,9 @@ A jQuery plugin is provided in plugin.js:
 
     var mousemove = $("body").signal("mousemove");
 
-To implement
+To do
 ------------
+* Find elegant way to get around code duplication
+* Creating a signal is too verbose at the moment (the same is true for Promise objects)
 * Ability to pause, stop and resume signals
 * Ability to stop listening to signals (clean them up)
-* signal.silent(n): emit if signal is silent for n ms
-* signal.count(n): emit if signal has emitted n times
-* signal.throttle(n): emit at most every n ms
-* signal.until(other): stop emitting if the other signal emits
-* signal.mute(n): do not emit during n ms
-* creating a signal is too verbose at the moment (the same is true for Promise objects)
