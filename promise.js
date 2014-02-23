@@ -16,7 +16,8 @@
 
 (function (global) {
 
-	var PENDING = 0, FULFILLED = 1, REJECTED = 2;
+	var PENDING = 0, FULFILLED = 1, REJECTED = 2,
+		states = ["PENDING", "FULFILLED", "REJECTED"];
 
 	function Resolver() {
 
@@ -87,7 +88,7 @@
 		this.status = function () {
 			var info = {
 				state: state,
-				stateText: ["PENDING", "FULFILLED", "REJECTED"][state]
+				stateText: states[state]
 			};
 			if (this.isFulfilled()) {
 				info.value = result;
